@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>睡莲之约 · Our Water Lilies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ========== 莫奈睡莲 · 后印象派调色盘 ========== */
+        :root {
+            --deep-night: #0c1929;
+            --midnight: #1a2a42;
+            --water-indigo: #2d3a5c;
+            --lilac: #6b5b95;
+            --wisteria: #9b7bb0;
+            --lotus-pink: #d4a5c4;
+            --lily-green: #2d5a3d;
+            --moss: #4a6b3a;
+            --gold: #e8c547;
+            --soft-gold: #f5df8a;
+            --ivory: #faf6ef;
+            --moonlight: #f0ebe0;
+            --brush-stroke: rgba(232, 197, 71, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+            color: var(--ivory);
+            min-height: 100vh;
+            background: 
+                /* 莫奈睡莲 · 多层渐变叠加 */
+                radial-gradient(ellipse at 20% 10%, rgba(232, 197, 71, 0.25) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 20%, rgba(155, 123, 176, 0.35) 0%, transparent 45%),
+                radial-gradient(ellipse at 60% 80%, rgba(45, 90, 61, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 10% 90%, rgba(212, 165, 196, 0.2) 0%, transparent 40%),
+                linear-gradient(170deg, 
+                    #0c1929 0%, 
+                    #1a2a42 15%, 
+                    #2d3a5c 35%, 
+                    #3d4a6e 50%,
+                    #5a4a7a 65%,
+                    #6b5b95 80%,
+                    #9b7bb0 100%
+                );
+            background-attachment: fixed;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* 笔触纹理叠加层 */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.03) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(232,197,71,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 50% 20%, rgba(155,123,176,0.05) 3px, transparent 3px);
+            background-size: 80px 80px, 120px 120px, 200px 200px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 柔和光斑 */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-1 { width: 500px; height: 500px; background: var(--wisteria); top: -100px; left: -100px; }
+        .glow-2 { width: 400px; height: 400px; background: var(--lily-green); bottom: -100px; right: -100px; opacity: 0.25; }
+        .glow-3 { width: 300px; height: 300px; background: var(--gold); top: 40%; right: 10%; opacity: 0.15; }
+
+        /* 飘落的睡莲花瓣 */
+        .petal {
+            position: fixed;
+            top: -30px;
+            font-size: 18px;
+            animation: drift linear infinite;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        @keyframes drift {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+            25% { transform: translateY(25vh) translateX(30px) rotate(90deg); }
+            50% { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+            75% { transform: translateY(75vh) translateX(40px) rotate(270deg); }
+            100% { transform: translateY(110vh) translateX(0) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ========== 画框卡片通用 ========== */
+        .frame {
+            background: linear-gradient(160deg, rgba(250, 246, 239, 0.08) 0%, rgba(250, 246, 239, 0.03) 100%);
+            border: 1px solid rgba(232, 197, 71, 0.3);
+            border-radius: 4px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            position: relative;
+            backdrop-filter: blur(12px);
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .frame::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(232, 197, 71, 0.15);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        /* ========== 英雄区：画作标题 ========== */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px;
+            animation: fadeIn 2s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero .opus-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.95em;
+            letter-spacing: 0.3em;
+            color: var(--soft-gold);
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+            font-weight: 300;
+            font-size: 3.8em;
+            letter-spacing: 0.08em;
+            background: linear-gradient(135deg, var(--soft-gold) 0%, var(--gold) 40%, var(--lotus-pink) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6em;
+            color: var(--lotus-pink);
+            letter-spacing: 0.05em;
+            margin: 25px 0 15px;
+        }
+
+        .hero .names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4em;
+            color: var(--moonlight);
+            letter-spacing: 0.15em;
+        }
+        .hero .names .ampersand {
+            color: var(--gold);
+            font-style: italic;
+            margin: 0 20px;
+            font-size: 1.2em;
+        }
+
+        .hero .date-range {
+            margin-top: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(240, 235, 224, 0.5);
+            letter-spacing: 0.2em;
+            font-size: 0.95em;
+        }
+
+        /* ========== 画作内标题 ========== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title .cn {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 400;
+            font-size: 1.6em;
+            color: var(--moonlight);
+            letter-spacing: 0.3em;
+        }
+        .section-title .en {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1em;
+            color: var(--soft-gold);
+            letter-spacing: 0.25em;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+        .section-title .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 15px auto;
+        }
+
+        /* ========== 计时器：画廊挂钟 ========== */
+        .timer-section { animation: fadeIn 2s ease 0.3s both; }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .timer-box {
+            text-align: center;
+            padding: 25px 10px;
+            position: relative;
+        }
+        .timer-box .number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3em;
+            font-weight: 300;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(232, 197, 71, 0.3);
+        }
+        .timer-box .label {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.85em;
+            color: rgba(240, 235, 224, 0.6);
+            letter-spacing: 0.3em;
+            margin-top: 10px;
+        }
+        .timer-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            right: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--soft-gold), transparent);
+            opacity: 0.3;
+        }
+        .timer-meta {
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(240, 235, 224, 0.5);
+            letter-spacing: 0.15em;
+        }
+
+        /* ========== 画作画廊 ========== */
+        .gallery-section { animation: fadeIn 2s ease 0.5s both; }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .painting {
+            aspect-ratio: 4/5;
+            position: relative;
+            border: 8px solid transparent;
+            border-image: linear-gradient(135deg, #8b7355, #c4a962, #8b7355) 1;
+            background: linear-gradient(160deg, #1a2a42, #2d3a5c, #5a4a7a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+            overflow: hidden;
+        }
+        .painting:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.5),
+                0 0 40px rgba(232, 197, 71, 0.15);
+        }
+        .painting .art {
+            font-size: 3.5em;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+            transition: transform 0.6s ease;
+        }
+        .painting:hover .art { transform: scale(1.1) rotate(3deg); }
+        .painting .label {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            background: rgba(12, 25, 41, 0.9);
+            padding: 8px;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.85em;
+            color: var(--soft-gold);
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== 时间线：艺术史事件 ========== */
+        .timeline-section { animation: fadeIn 2s ease 0.7s both; }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 22px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                var(--gold) 10%, 
+                var(--wisteria) 50%, 
+                var(--lily-green) 90%,
+                transparent 100%
+            );
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: linear-gradient(160deg, rgba(250, 246, 239, 0.05), rgba(250, 246, 239, 0.02));
+            border-radius: 2px;
+            border-left: 2px solid var(--gold);
+            transition: all 0.4s ease;
+        }
+        .timeline-item:hover {
+            background: linear-gradient(160deg, rgba(232, 197, 71, 0.08), rgba(155, 123, 176, 0.05));
+            transform: translateX(5px);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(232, 197, 71, 0.5);
+        }
+        .timeline-item .year {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--soft-gold);
+            font-size: 1.1em;
+            letter-spacing: 0.1em;
+        }
+        .timeline-item .event {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--moonlight);
+            margin-top: 8px;
+            font-size: 1.05em;
+            letter-spacing: 0.05em;
+        }
+        .timeline-item .event .en {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(240, 235, 224, 0.5);
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+
+        /* ========== 情书：手写画作 ========== */
+        .letter-section { animation: fadeIn 2s ease 0.9s both; }
+
+        .letter {
+            text-align: center;
+        }
+        .letter .handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8em;
+            line-height: 1.6;
+            color: var(--ivory);
+            letter-spacing: 0.02em;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+        .letter .handwritten p {
+            margin-bottom: 18px;
+            text-indent: 1.5em;
+        }
+        .letter .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4em;
+            color: var(--gold);
+            text-align: right;
+            margin-top: 30px;
+            letter-spacing: 0.1em;
+        }
+        .letter .brush-stroke-bottom {
+            width: 200px;
+            height: 20px;
+            margin: 30px auto 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0,10 Q50,0 100,10 T200,10' stroke='%23e8c547' stroke-width='1' fill='none' opacity='0.5'/%3E%3C/svg%3E") no-repeat center;
+        }
+
+        /* ========== 页脚：画廊标识 ========== */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+        footer .museum-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--soft-gold);
+            letter-spacing: 0.3em;
+            font-size: 0.8em;
+            opacity: 0.5;
+        }
+        footer .year {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+            font-size: 1.2em;
+            margin-top: 10px;
+            letter-spacing: 0.2em;
+        }
+        footer .eternal {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3em;
+            color: var(--lotus-pink);
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2.6em; }
+            .hero .names { font-size: 1.1em; }
+            .timer-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .timer-box .number { font-size: 2.2em; }
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .frame { padding: 35px 25px; }
+            .timeline { padding-left: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 柔光光斑 -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <!-- 飘落花瓣 -->
+    <div id="petals"></div>
+
+    <div class="container">
+
+        <!-- ====== 画作标题页 ====== -->
+        <section class="hero">
+            <div class="opus-number">— OPUS 001 · 2024 —</div>
+            <h1>睡莲之约</h1>
+            <div class="subtitle">Un jardin de nénuphars</div>
+            <div class="names">
+                SHE <span class="ampersand">&</span> HE
+            </div>
+            <div class="date-range">— depuis MMXXIV —</div>
+        </section>
+
+        <!-- ====== 画廊挂钟：在一起多久 ====== -->
+        <section class="timer-section frame">
+            <div class="section-title">
+                <div class="cn">时 光 流 转</div>
+                <div class="divider"></div>
+                <div class="en">The Passing of Time</div>
+            </div>
+            <div class="timer-grid">
+                <div class="timer-box">
+                    <span class="number" id="days">0</span>
+                    <span class="label">天</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="hours">0</span>
+                    <span class="label">时</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="minutes">0</span>
+                    <span class="label">分</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="seconds">0</span>
+                    <span class="label">秒</span>
+                </div>
+            </div>
+            <p class="timer-meta">
+                — 自 <span id="startDateDisplay">MMXXIV · I · I</span> 起 —
+            </p>
+        </section>
+
+        <!-- ====== 美术馆：我们的回忆画作 ====== -->
+        <section class="gallery-section frame">
+            <div class="section-title">
+                <div class="cn">回 忆 画 廊</div>
+                <div class="divider"></div>
+                <div class="en">Galerie des Souvenirs</div>
+            </div>
+            <div class="gallery">
+                <div class="painting" title="点击添加照片">
+                    <span class="art">🌸</span>
+                    <div class="label">Le Premier Regard</div>
+                </div>
+                <div class="painting" title="点击添加照片">
+                    <span class="art">🌅</span>
+                    <div class="label">Aube d'Été</div>
+                </div>
+                <div class="painting" title="点击添加照片">
+                    <span class="art">🍷</span>
+                    <div class="label">Soirée d'Automne</div>
+                </div>
+                <div class="painting" title="点击添加照片">
+                    <span class="art">✈️</span>
+                    <div class="label">Voyage Ensemble</div>
+                </div>
+                <div class="painting" title="点击添加照片">
+                    <span class="art">🎡</span>
+                    <div class="label">Fête Foraine</div>
+                </div>
+                <div class="painting" title="点击添加照片">
+                    <span class="art">🌙</span>
+                    <div class="label">Nuit Étoilée</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== 艺术史时间线 ====== -->
+        <section class="timeline-section frame">
+            <div class="section-title">
+                <div class="cn">我 们 的 编 年 史</div>
+                <div class="divider"></div>
+                <div class="en">Chronique de Nous</div>
+            </div>
+            <div class="timeline" id="timeline">
+                <div class="timeline-item">
+                    <div class="year">MMXXIV · I · I</div>
+                    <div class="event">初次相遇，如睡莲初绽 <span class="en">— Notre première rencontre</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">MMXXIV · II · XIV</div>
+                    <div class="event">第一个情人节 <span class="en">— Saint-Valentin</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">MMXXIV · VII · VII</div>
+                    <div class="event">第一次一起远行 <span class="en">— Notre premier voyage</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">MMXXV · I · I</div>
+                    <div class="event">共赴新年之约 <span class="en">— Bonne année ensemble</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== 手写情书 ====== -->
+        <section class="letter-section frame">
+            <div class="section-title">
+                <div class="cn">给 你 的 信</div>
+                <div class="divider"></div>
+                <div class="en">Lettre à Toi</div>
+            </div>
+            <div class="letter">
+                <div class="handwritten">
+                    <p>亲爱的，</p>
+                    <p>若时光是一幅画，你便是那最明亮的笔触。</p>
+                    <p>在遇见你之前，我的画布只铺满了沉静的蓝；</p>
+                    <p>而你走来，带来了睡莲的粉、阳光的金、还有整个春天的绿。</p>
+                    <p>从此，每一个平凡的日子都成了杰作。</p>
+                    <p>愿我们的故事，永远在这幅画里延续——</p>
+                    <p>一如莫奈的睡莲，百年之后，依然盛放。</p>
+                </div>
+                <div class="signature">— Pour toujours à toi</div>
+                <div class="brush-stroke-bottom"></div>
+            </div>
+        </section>
+
+        <!-- ====== 页脚 · 美术馆印 ====== -->
+        <footer>
+            <div class="museum-mark">LA GALERIE DE L'AMOUR</div>
+            <div class="year">MMXXIV — ∞</div>
+            <div class="eternal">ensemble, pour toujours</div>
+        </footer>
+
+    </div>
+
+    <script>
+        // ====== 修改这里：你们在一起的日期 ======
+        const OUR_START_DATE = '2024-01-01T00:00:00';
+        // =========================================
+
+        // —— 时光挂钟 ——
+        function updateTimer() {
+            const start = new Date(OUR_START_DATE).getTime();
+            const now = new Date().getTime();
+            const diff = now - start;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toLocaleString();
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            const d = new Date(OUR_START_DATE);
+            const romanYear = toRoman(d.getFullYear());
+            document.getElementById('startDateDisplay').textContent = 
+                `${romanYear} · ${d.getMonth()+1} · ${d.getDate()}`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // 阿拉伯数字 → 罗马数字（简单版）
+        function toRoman(num) {
+            const map = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+            let result = '';
+            for (const [val, sym] of map) {
+                while (num >= val) { result += sym; num -= val; }
+            }
+            return result;
+        }
+
+        // —— 飘落睡莲花瓣 ——
+        function createPetal() {
+            const petals = ['🌸', '🌺', '✨', '💫', '🍃'];
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 8 + 10) + 's';
+            petal.style.fontSize = (Math.random() * 10 + 14) + 'px';
+            petal.style.opacity = (Math.random() * 0.4 + 0.2).toFixed(2);
+            document.getElementById('petals').appendChild(petal);
+            setTimeout(() => petal.remove(), 20000);
+        }
+        setInterval(createPetal, 1200);
+
+        // —— 画作点击提示 ——
+        document.querySelectorAll('.painting').forEach(item => {
+            item.addEventListener('click', () => {
+                alert('🖼️  添加你们的照片：\n\n把图片放到 index.html 同目录\n然后把每个画作里的 emoji 替换成：\n<img src="照片名.jpg" style="width:100%;height:100%;object-fit:cover;">');
+            });
+        });
+    </script>
+</body>
+</html>
