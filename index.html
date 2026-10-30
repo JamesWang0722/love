@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>睡莲之约 · Our Water Lilies</title>
+    <title>咕咕嘎嘎 · Gu Gu Ga Ga</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
@@ -272,6 +272,52 @@
         /* ========== 画作画廊 ========== */
         .gallery-section { animation: fadeIn 2s ease 0.5s both; }
 
+        /* 展区 */
+        .exhibition {
+            margin-bottom: 60px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(232, 197, 71, 0.15);
+        }
+        .exhibition:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .exhibition-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+        .exhibition-header .date-tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--soft-gold);
+            font-size: 0.9em;
+            letter-spacing: 0.25em;
+            opacity: 0.6;
+        }
+        .exhibition-header .title {
+            font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            color: var(--moonlight);
+            letter-spacing: 0.3em;
+            margin: 12px 0;
+        }
+        .exhibition-header .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.95em;
+            color: var(--lotus-pink);
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+        }
+        .exhibition-header .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 18px auto 0;
+        }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -301,7 +347,14 @@
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
             transition: transform 0.6s ease;
         }
-        .painting:hover .art { transform: scale(1.1) rotate(3deg); }
+        .painting img.art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            font-size: inherit;
+            filter: none;
+        }
+        .painting:hover .art { transform: scale(1.08) rotate(2deg); }
         .painting .label {
             position: absolute;
             bottom: -2px;
@@ -477,10 +530,10 @@
         <!-- ====== 画作标题页 ====== -->
         <section class="hero">
             <div class="opus-number">— OPUS 001 · 2024 —</div>
-            <h1>睡莲之约</h1>
-            <div class="subtitle">Un jardin de nénuphars</div>
+            <h1>咕 咕 嘎 嘎</h1>
+            <div class="subtitle">Since the Old Gate East</div>
             <div class="names">
-                SHE <span class="ampersand">&</span> HE
+                ZSY <span class="ampersand">&</span> WYC
             </div>
             <div class="date-range">— depuis MMXXIV —</div>
         </section>
@@ -515,39 +568,242 @@
             </p>
         </section>
 
-        <!-- ====== 美术馆：我们的回忆画作 ====== -->
+        <!-- ====== 美术馆：分展区 ====== -->
         <section class="gallery-section frame">
             <div class="section-title">
                 <div class="cn">回 忆 画 廊</div>
                 <div class="divider"></div>
                 <div class="en">Galerie des Souvenirs</div>
             </div>
-            <div class="gallery">
-                <div class="painting" title="点击添加照片">
-                    <span class="art">🌸</span>
-                    <div class="label">Le Premier Regard</div>
+
+            <!-- ========== 展区一：老门东初见 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">2024 · IX · XXVIII</div>
+                    <div class="title">老 门 东 初 见</div>
+                    <div class="subtitle">The First Walk · Old Gate East</div>
+                    <div class="divider"></div>
                 </div>
-                <div class="painting" title="点击添加照片">
-                    <span class="art">🌅</span>
-                    <div class="label">Aube d'Été</div>
-                </div>
-                <div class="painting" title="点击添加照片">
-                    <span class="art">🍷</span>
-                    <div class="label">Soirée d'Automne</div>
-                </div>
-                <div class="painting" title="点击添加照片">
-                    <span class="art">✈️</span>
-                    <div class="label">Voyage Ensemble</div>
-                </div>
-                <div class="painting" title="点击添加照片">
-                    <span class="art">🎡</span>
-                    <div class="label">Fête Foraine</div>
-                </div>
-                <div class="painting" title="点击添加照片">
-                    <span class="art">🌙</span>
-                    <div class="label">Nuit Étoilée</div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/laomendong-1.jpg" alt="老门东" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">初见</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/laomendong-2.jpg" alt="夜色" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">夜色</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/cat.jpg" alt="撸猫" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">撸猫</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/qinhuai-river.jpg" alt="秦淮河" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">秦淮河</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/fuzimiao.jpg" alt="夫子庙" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">夫子庙</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/laomendong-funny.jpg" alt="丑照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">丑照 😂</div>
+                    </div>
                 </div>
             </div>
+
+            <!-- ========== 展区二：十月十四 · 凌晨官宣 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">2024 · X · XIV</div>
+                    <div class="title">凌 晨 五 点 · 官 宣</div>
+                    <div class="subtitle">5 AM · The Whole World Knew</div>
+                    <div class="divider"></div>
+                </div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/night-walk-1.jpg" alt="夜路赶来" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">夜路赶来</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/night-walk-2.jpg" alt="凌晨陪伴" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">凌晨陪伴</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/dawn-announcement.jpg" alt="官宣" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">朋友圈官宣 🎉</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 展区三：一周年纪念 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">2025 · X · VIII</div>
+                    <div class="title">一 周 年 纪 念</div>
+                    <div class="subtitle">One Year · Silver Rings & Cake Dogs</div>
+                    <div class="divider"></div>
+                </div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-flowers.jpg" alt="鲜花" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">鲜花</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-cake-dog.png" alt="线条小狗蛋糕" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">线条小狗蛋糕</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-cake.jpg" alt="蛋糕甜" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">蛋糕甜</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-ring-making.jpg" alt="手作银戒" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">手作银戒</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-ring-done.jpg" alt="银戒成" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">银戒成 💍</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-1.jpg" alt="稻满湘" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">稻满湘</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-2.jpg" alt="稻满湘续" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">稻满湘续</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv-3.jpg" alt="圆满" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">圆满</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 展区四：江边散步 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">— 日 常 时 光 —</div>
+                    <div class="title">江 边 · 日 落 与 散 步</div>
+                    <div class="subtitle">Riverside · Sunset & Walks</div>
+                    <div class="divider"></div>
+                </div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-sunset-1.jpg" alt="落日" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">落日</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-sunset-2.jpg" alt="夕阳" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">夕阳</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-walk.jpg" alt="堤坝散步" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">堤坝散步</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-dog.jpg" alt="撸狗" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">撸狗 🐕</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-dam.jpg" alt="堤坝" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">堤坝</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-1.jpg" alt="江边日常" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">日常</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/riverside-mood.jpg" alt="安静时刻" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">安静时刻</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 展区五：二周年纪念 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">2026 · X · VIII</div>
+                    <div class="title">二 周 年 纪 念</div>
+                    <div class="subtitle">Two Years · Seven Happiness & DQ</div>
+                    <div class="divider"></div>
+                </div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-qixintian-1.jpg" alt="七欣天" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">七欣天</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-qixintian-2.jpg" alt="七欣天" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">七欣天</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-qixintian-3.jpg" alt="七欣天" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">七欣天</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-dq-cake.jpg" alt="DQ蛋糕" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">DQ 蛋糕</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-tart.jpg" alt="超长蛋挞" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">超长蛋挞</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/anniv2-end.jpg" alt="圆满" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">圆满</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 展区六：抓拍瞬间 · 日常 ========== -->
+            <div class="exhibition">
+                <div class="exhibition-header">
+                    <div class="date-tag">— 日 常 碎 片 —</div>
+                    <div class="title">抓 拍 瞬 间</div>
+                    <div class="subtitle">Candid Moments · Our Daily Bits</div>
+                    <div class="divider"></div>
+                </div>
+                <div class="gallery">
+                    <div class="painting">
+                        <img class="art" src="photos/daily-casual-1.jpg" alt="合照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">合照</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-casual-2.jpg" alt="合照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">合照</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-beauty.jpg" alt="臭美" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">臭美</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-knitting-1.jpg" alt="织围巾" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">织围巾中</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-knitting-2.jpg" alt="围巾成品" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">围巾成 🧶</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-beads.jpg" alt="拼豆" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">拼豆</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-ugly-1.jpg" alt="丑照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">丑照 😂</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-ugly-2.jpg" alt="丑照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">丑照 😂</div>
+                    </div>
+                    <div class="painting">
+                        <img class="art" src="photos/daily-ugly-3.jpg" alt="丑照" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;">
+                        <div class="label">丑照 😂</div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- ====== 艺术史时间线 ====== -->
@@ -559,20 +815,24 @@
             </div>
             <div class="timeline" id="timeline">
                 <div class="timeline-item">
-                    <div class="year">MMXXIV · I · I</div>
-                    <div class="event">初次相遇，如睡莲初绽 <span class="en">— Notre première rencontre</span></div>
+                    <div class="year">2024 · IX · XXVIII</div>
+                    <div class="event">老门东的第一次，吃饭，逛街，算是约会吧 <span class="en">— Old Gate East, our first walk</span></div>
                 </div>
                 <div class="timeline-item">
-                    <div class="year">MMXXIV · II · XIV</div>
-                    <div class="event">第一个情人节 <span class="en">— Saint-Valentin</span></div>
+                    <div class="year">2024 · X · VIII</div>
+                    <div class="event">羊山公园，正式确定关系 <span class="en">— Yangshan Park, the day we said yes</span></div>
                 </div>
                 <div class="timeline-item">
-                    <div class="year">MMXXIV · VII · VII</div>
-                    <div class="event">第一次一起远行 <span class="en">— Notre premier voyage</span></div>
+                    <div class="year">2024 · X · XIV</div>
+                    <div class="event">凌晨五点，朋友圈官宣——旷了早上的英语课，但是值 <span class="en">— 5 AM, worth skipping English class</span></div>
                 </div>
                 <div class="timeline-item">
-                    <div class="year">MMXXV · I · I</div>
-                    <div class="event">共赴新年之约 <span class="en">— Bonne année ensemble</span></div>
+                    <div class="year">2025 · X · VIII</div>
+                    <div class="event">一周年。稻满湘吃饭，手作银戒，线条小狗蛋糕 <span class="en">— One year. Silver rings & cake dogs</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2026 · X · VIII</div>
+                    <div class="event">二周年。七欣天，DQ 蛋糕，超长蛋挞 <span class="en">— Two years. Seven Happiness & DQ</span></div>
                 </div>
             </div>
         </section>
@@ -586,15 +846,15 @@
             </div>
             <div class="letter">
                 <div class="handwritten">
-                    <p>亲爱的，</p>
-                    <p>若时光是一幅画，你便是那最明亮的笔触。</p>
-                    <p>在遇见你之前，我的画布只铺满了沉静的蓝；</p>
-                    <p>而你走来，带来了睡莲的粉、阳光的金、还有整个春天的绿。</p>
-                    <p>从此，每一个平凡的日子都成了杰作。</p>
-                    <p>愿我们的故事，永远在这幅画里延续——</p>
-                    <p>一如莫奈的睡莲，百年之后，依然盛放。</p>
+                    <p>ZSY，</p>
+                    <p>从老门东的夜色，到羊山公园的风；</p>
+                    <p>从崩溃的凌晨，到阳光下的朋友圈——</p>
+                    <p>你走进我生命的那一刻，画布突然就亮了。</p>
+                    <p>我不会写太好的情话，但我知道：</p>
+                    <p>你难过的时候我在，你开心的时候我也在。</p>
+                    <p>剩下的日子，还长。</p>
                 </div>
-                <div class="signature">— Pour toujours à toi</div>
+                <div class="signature">— WYC, toujours</div>
                 <div class="brush-stroke-bottom"></div>
             </div>
         </section>
@@ -610,7 +870,7 @@
 
     <script>
         // ====== 修改这里：你们在一起的日期 ======
-        const OUR_START_DATE = '2024-01-01T00:00:00';
+        const OUR_START_DATE = '2024-10-08T00:00:00';
         // =========================================
 
         // —— 时光挂钟 ——
